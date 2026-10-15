@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
+
+:root {
+  --ink: #202b27; --muted: #65736d; --paper: #f5f5ef;
+  --panel: #ffffff; --line: #e0e5dd; --green: #254c3e;
+  --green-light: #e9f0eb; --shadow: 0 8px 28px rgba(28, 48, 39, .06);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "DM Sans", sans-serif;
+}
+
+/* Hero banner */
+.hero {
+  padding: 40px max(22px, calc((100% - 1160px) / 2));
+  color: #fff;
+  background: #203e34;
+}
+
+h1 {
+  margin: 0;
+  font-family: "Playfair Display", serif;
+  font-weight: 700;
+  font-size: clamp(1.5rem, 3.2vw, 2.2rem); /* fluid, no clipping */
+  line-height: 1.2;
+}
+
+main {
+  width: min(1160px, calc(100% - 32px));
+  margin: 26px auto 50px;
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  padding: 24px;
+  margin-bottom: 22px;
+}
+
+h2 {
+  margin: 0 0 8px;
+  font: 700 1.5rem "Playfair Display", serif;
+}
+
+p { line-height: 1.6; }
+
+.map-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 18px;
+  margin-bottom: 16px;
+}
+
+.map-heading p { margin: 0; color: var(--muted); }
+
+/* Container for each Vega view.
+   Sized generously so Vega's own titles/subtitles have room. */
+.vega-container {
+  width: 100%;
+  min-height: 520px;
+  display: flex;
+  justify-content: center;
+}
+
+/* Make the embedded vega wrapper responsive */
+.vega-container .vega-embed,
+.vega-container .vega-embed > div {
+  width: 100%;
+}
+
+/* Responsive tweaks */
+@media (max-width: 720px) {
+  .hero { padding: 28px 20px; }
+  .panel { padding: 17px; }
+  .map-heading { display: block; }
+  .vega-container { min-height: 380px; }
+}
