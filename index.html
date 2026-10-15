@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Antiques Collection — Vega-Lite Explorer</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+</head>
+<body>
+  <header class="hero">
+    <h1>Antiques Collection in Australia</h1>
+  </header>
+
+  <main>
+    <!-- MAP 1 -->
+    <section class="panel map-panel">
+      <div class="map-heading">
+        <div>
+          <h2>Museum Attendance</h2>
+          <p>Australian states shaded by regional public museum attendance rates (%)</p>
+        </div>
+      </div>
+      <div id="map1" class="vega-container"></div>
+    </section>
+
+    <!-- MAP 2 -->
+    <section class="panel map-panel">
+      <div class="map-heading">
+        <div>
+          <h2>Total Antique Historical Object Collections</h2>
+          <p>Proportional symbols tracking total registered material heritage items<br>
+          and antique artifact records in state archives.</p>
+        </div>
+      </div>
+      <div id="map2" class="vega-container"></div>
+    </section>
+
+    <!-- MAP 3 -->
+    <section class="panel map-panel">
+      <div class="map-heading">
+        <div>
+          <h2>Dot Density Distribution of Artifacts</h2>
+          <p>Scattered point markers revealing intense historical clustering<br>
+          of antique collections within early coastal settlements</p>
+        </div>
+      </div>
+      <div id="map3" class="vega-container"></div>
+    </section>
+
+    <!-- Chart 1: Grouped Bar Chart -->
+    <section class="panel map-panel">
+      <div class="map-heading">
+        <div>
+          <h2>Composition of Australia's Antique Collections</h2>
+          <p>Proportional share of objects tracked across recorded antique categories</p>
+        </div>
+      </div>
+      <div id="idiom1" class="vega-container"></div>
+    </section>
+
+    <!-- Chart 2: Dual Axis Layered Chart -->
+    <section class="panel map-panel">
+      <div class="map-heading">
+        <div>
+          <h2>Origins of Antiques Across Australian States</h2>
+          <p>Distribution of item manufacturing origins across regional collection repositorie</p>
+        </div>
+      </div>
+      <div id="idiom2" class="vega-container"></div>
+    </section>
+
+    <!-- Chart 3: Faceted Donut Rings -->
+    <section class="panel map-panel">
+      <div class="map-heading">
+        <div>
+          <h2>Regional Repository Material Composition</h2>
+          <p>Side-by-side high-definition donut charts tracking the structural share breakdown<br>
+            of major institutional holdings</p>
+        </div>
+      </div>
+      <div id="idiom3" class="vega-container"></div>
+    </section>
+
+    <!-- Chart 4: Treemap Card Layout -->
+    <section class="panel map-panel">
+      <div class="map-heading">
+        <div>
+          <h2>National Archive Engagement by Age Cohort</h2>
+          <p>A line chart tracking total generational engagement<br>
+            across different age demographics</p>
+        </div>
+      </div>
+      <div id="idiom4" class="vega-container"></div>
+    </section>
+
+    <!-- Chart 5: Packed Bubble Chart -->
+    <section class="panel map-panel">
+      <div class="map-heading">
+        <div>
+          <h2>Preservation Sizing Category Clusters</h2>
+          <p>Absolute volume of physical objects preserved across major classification types</p>
+        </div>
+      </div>
+      <div id="idiom5" class="vega-container"></div>
+    </section>
+
+    <!-- Chart 6: Interactive Heatmap Grid Matrix -->
+    <section class="panel map-panel">
+      <div class="map-heading">
+        <div>
+          <h2>Material Classification and Chronological Transformation Grid</h2>
+          <p>An interactive, hover-responsive heatmap matrix cross-tabulating<br>
+            collection densities across historical eras and styles</p>
+        </div>
+      </div>
+      <div id="idiom6" class="vega-container"></div>
+    </section>
+
+  <!-- AUTHORSHIP, DATE & METADATA SECTION (Inserted after Chart 6) -->
+  <div class="panel" style="background: var(--green-light); border-color: var(--line);">
+    <div class="map-heading" style="margin-bottom: 0;">
+      <div>
+        <h2 style="color: var(--green); margin-bottom: 6px;">Authority</h2>
+        <p style="margin-bottom: 12px;"><strong>Author:</strong> Lim Jia Li 34476523</p>
+        <p style="margin-bottom: 12px;"><strong>Date of Publication:</strong> 15 October 2026</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const OPT = { actions: false, renderer: "canvas" };
+
+    vegaEmbed("#map1", "./idioms/map1.vg.json", OPT).catch(err => console.error("Map 1 failed:", err));
+    vegaEmbed("#map2", "./idioms/map2.vg.json", OPT).catch(err => console.error("Map 2 failed:", err));
+    vegaEmbed("#map3", "./idioms/map3.vg.json", OPT).catch(err => console.error("Map 3 failed:", err));
+
+    vegaEmbed("#idiom1", "./idioms/chart1.vg.json", OPT).catch(e => console.error("Chart 1 failed:", e));
+    vegaEmbed("#idiom2", "./idioms/chart2.vg.json", OPT).catch(e => console.error("Chart 2 failed:", e));
+    vegaEmbed("#idiom3", "./idioms/chart3.vg.json", OPT).catch(e => console.error("Chart 3 failed:", e));
+    vegaEmbed("#idiom4", "./idioms/chart4.vg.json", OPT).catch(e => console.error("Chart 4 failed:", e));
+    vegaEmbed("#idiom5", "./idioms/chart5.vg.json", OPT).catch(e => console.error("Chart 5 failed:", e));
+    vegaEmbed("#idiom6", "./idioms/chart6.vg.json", OPT).catch(e => console.error("Chart 6 failed:", e));
+    vegaEmbed("#idiom7", "./idioms/chart7.vg.json", OPT).catch(e => console.error("Chart 7 failed:", e));
+  </script>
+</body>
+</html>
