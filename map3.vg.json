@@ -1,0 +1,154 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 480,
+  "autosize": { "type": "fit", "contains": "padding" },
+  "title": {
+    "anchor": "start",
+    "fontSize": 16,
+    "subtitleFontSize": 12,
+    "subtitleColor": "#666",
+    "offset": 12
+  },
+  "projection": {
+    "type": "mercator",
+    "center": [134, -28.2],
+    "scale": 650
+  },
+  "layer": [
+    {
+      "description": "Layer 1: Base Map Background Shapes (Using your identical, working URL formula)",
+      "data": {
+        "url": "https://raw.githubusercontent.com/rowanhogan/australian-states/master/states.geojson",
+        "format": { "type": "json", "property": "features" }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#f4f4f4",
+        "stroke": "#d0d0d0",
+        "strokeWidth": 1
+      }
+    },
+    {
+      "description": "Layer 2: Dot Density Distribution Points scattered throughout the regions",
+      "data": {
+        "values": [
+          {"State": "New South Wales", "Latitude": -33.8688, "Longitude": 151.2093},
+          {"State": "New South Wales", "Latitude": -32.9283, "Longitude": 151.7817},
+          {"State": "New South Wales", "Latitude": -34.4278, "Longitude": 150.8931},
+          {"State": "New South Wales", "Latitude": -33.7444, "Longitude": 150.6878},
+          {"State": "New South Wales", "Latitude": -33.4167, "Longitude": 149.5833},
+          {"State": "New South Wales", "Latitude": -31.0906, "Longitude": 150.9292},
+          {"State": "New South Wales", "Latitude": -35.1189, "Longitude": 147.3689},
+          {"State": "New South Wales", "Latitude": -32.2500, "Longitude": 148.6000},
+          {"State": "New South Wales", "Latitude": -34.2833, "Longitude": 146.0333},
+          {"State": "New South Wales", "Latitude": -28.8167, "Longitude": 153.2833},
+          {"State": "New South Wales", "Latitude": -36.4833, "Longitude": 148.4500},
+          {"State": "New South Wales", "Latitude": -33.0000, "Longitude": 147.5000},
+          {"State": "New South Wales", "Latitude": -31.5000, "Longitude": 145.5000},
+          {"State": "Victoria", "Latitude": -37.8136, "Longitude": 144.9631},
+          {"State": "Victoria", "Latitude": -38.1499, "Longitude": 144.3617},
+          {"State": "Victoria", "Latitude": -37.5622, "Longitude": 143.8503},
+          {"State": "Victoria", "Latitude": -36.7570, "Longitude": 144.2787},
+          {"State": "Victoria", "Latitude": -36.3742, "Longitude": 146.4136},
+          {"State": "Victoria", "Latitude": -38.3333, "Longitude": 142.4833},
+          {"State": "Victoria", "Latitude": -38.2833, "Longitude": 146.5333},
+          {"State": "Victoria", "Latitude": -36.1214, "Longitude": 146.8939},
+          {"State": "Victoria", "Latitude": -37.0000, "Longitude": 142.5000},
+          {"State": "Victoria", "Latitude": -36.5000, "Longitude": 145.5000},
+          {"State": "Victoria", "Latitude": -37.3000, "Longitude": 144.0000},
+          {"State": "Victoria", "Latitude": -38.0000, "Longitude": 145.2000},
+          {"State": "Queensland", "Latitude": -27.4705, "Longitude": 153.0260},
+          {"State": "Queensland", "Latitude": -28.0167, "Longitude": 153.4000},
+          {"State": "Queensland", "Latitude": -26.6500, "Longitude": 153.0667},
+          {"State": "Queensland", "Latitude": -23.3750, "Longitude": 150.5117},
+          {"State": "Queensland", "Latitude": -19.2564, "Longitude": 146.8183},
+          {"State": "Queensland", "Latitude": -16.9203, "Longitude": 145.7710},
+          {"State": "Queensland", "Latitude": -27.5598, "Longitude": 151.9507},
+          {"State": "Queensland", "Latitude": -25.5407, "Longitude": 152.7044},
+          {"State": "Queensland", "Latitude": -24.8661, "Longitude": 152.3489},
+          {"State": "Queensland", "Latitude": -21.1411, "Longitude": 149.1861},
+          {"State": "Queensland", "Latitude": -20.0768, "Longitude": 146.2642},
+          {"State": "Queensland", "Latitude": -23.5000, "Longitude": 145.0000},
+          {"State": "South Australia", "Latitude": -34.9285, "Longitude": 138.6007},
+          {"State": "South Australia", "Latitude": -34.5000, "Longitude": 139.0000},
+          {"State": "South Australia", "Latitude": -33.7233, "Longitude": 138.1156},
+          {"State": "South Australia", "Latitude": -37.8294, "Longitude": 140.7818},
+          {"State": "South Australia", "Latitude": -32.4936, "Longitude": 137.7656},
+          {"State": "South Australia", "Latitude": -34.7258, "Longitude": 135.8614},
+          {"State": "South Australia", "Latitude": -29.5000, "Longitude": 137.0000},
+          {"State": "Western Australia", "Latitude": -31.9505, "Longitude": 115.8605},
+          {"State": "Western Australia", "Latitude": -32.0558, "Longitude": 115.7424},
+          {"State": "Western Australia", "Latitude": -33.3271, "Longitude": 115.6419},
+          {"State": "Western Australia", "Latitude": -30.7489, "Longitude": 121.4658},
+          {"State": "Western Australia", "Latitude": -35.0228, "Longitude": 117.8814},
+          {"State": "Western Australia", "Latitude": -33.8614, "Longitude": 121.8914},
+          {"State": "Western Australia", "Latitude": -28.7744, "Longitude": 114.6089},
+          {"State": "Western Australia", "Latitude": -20.3108, "Longitude": 118.5775},
+          {"State": "Western Australia", "Latitude": -32.5333, "Longitude": 115.7167},
+          {"State": "Tasmania", "Latitude": -42.8821, "Longitude": 147.3272},
+          {"State": "Tasmania", "Latitude": -41.4341, "Longitude": 147.1364},
+          {"State": "Tasmania", "Latitude": -41.0558, "Longitude": 145.9094},
+          {"State": "Tasmania", "Latitude": -41.1542, "Longitude": 146.3575},
+          {"State": "Tasmania", "Latitude": -42.5000, "Longitude": 147.0000},
+          {"State": "Tasmania", "Latitude": -43.0000, "Longitude": 147.8000},
+          {"State": "Australian Capital Territory", "Latitude": -35.2809, "Longitude": 149.1300},
+          {"State": "Australian Capital Territory", "Latitude": -35.3500, "Longitude": 149.1500},
+          {"State": "Australian Capital Territory", "Latitude": -35.2000, "Longitude": 149.0500},
+          {"State": "Northern Territory", "Latitude": -12.4634, "Longitude": 130.8456},
+          {"State": "Northern Territory", "Latitude": -23.6980, "Longitude": 133.8807},
+          {"State": "Northern Territory", "Latitude": -14.4652, "Longitude": 132.2635},
+          {"State": "Northern Territory", "Latitude": -12.1824, "Longitude": 136.7801}
+        ]
+      },
+      "mark": {
+        "type": "circle",
+        "size": 8,
+        "color": "#333333",
+        "opacity": 0.85
+      },
+      "encoding": {
+        "longitude": { "field": "Longitude", "type": "quantitative" },
+        "latitude": { "field": "Latitude", "type": "quantitative" },
+        "tooltip": [
+          {"field": "State", "type": "nominal", "title": "State Region"}
+        ]
+      }
+    },
+    {
+      "description": "Layer 3: Legend Circle Marker (Moved Up into View window)",
+      "data": {
+        "values": [{"lon": 114.0, "lat": -38.8}]
+      },
+      "mark": {
+        "type": "circle",
+        "size": 8,
+        "color": "#333333",
+        "opacity": 0.85
+      },
+      "encoding": {
+        "longitude": {"field": "lon", "type": "quantitative"},
+        "latitude": {"field": "lat", "type": "quantitative"}
+      }
+    },
+    {
+      "description": "Layer 4: Legend Text (Moved Up into View window)",
+      "data": {
+        "values": [{"lon": 115.5, "lat": -39.0, "text": "1 Dot = 5,000 Registered Objects"}]
+      },
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "color": "#333333"
+      },
+      "encoding": {
+        "longitude": {"field": "lon", "type": "quantitative"},
+        "latitude": {"field": "lat", "type": "quantitative"},
+        "text": {"field": "text", "type": "nominal"}
+      }
+    }
+  ]
+}

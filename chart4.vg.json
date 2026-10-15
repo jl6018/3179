@@ -1,0 +1,38 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Trend Line tracking aggregate population totals per age group",
+  "width": "container",
+  "height": 480,
+  "autosize": {"type": "fit", "contains": "padding"},
+  "data": {"url": "./data/abs_demographics_antiques.csv"},
+  "title": {
+    "font": "DM Sans, sans-serif",
+    "fontSize": 16,
+    "fontWeight": "bold",
+    "subtitleFontSize": 12,
+    "subtitleColor": "#65736d"
+  },
+  "mark": {
+    "type": "line", 
+    "point": {"color": "#78350f", "size": 40}, 
+    "strokeWidth": 3.5
+  },
+  "encoding": {
+    "x": {
+      "field": "Age_Group",
+      "type": "nominal",
+      "axis": {"title": "Age Cohort", "labelAngle": -15}
+    },
+    "y": {
+      "field": "Thousands_Of_People",
+      "type": "quantitative",
+      "aggregate": "sum",
+      "axis": {"title": "Total Generational Engagement ('000)"}
+    },
+    "color": {"value": "#78350f"},
+    "tooltip": [
+      {"field": "Age_Group", "type": "nominal", "title": "Age Group"},
+      {"field": "Thousands_Of_People", "type": "quantitative", "aggregate": "sum", "title": "Total Combined Visitors", "format": ","}
+    ]
+  }
+}

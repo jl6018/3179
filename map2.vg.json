@@ -1,0 +1,74 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 480,
+  "autosize": { "type": "fit", "contains": "padding" },
+  "title": {
+    "anchor": "start",
+    "fontSize": 16,
+    "subtitleFontSize": 12,
+    "subtitleColor": "#666",
+    "offset": 12
+  },
+  "projection": {
+    "type": "mercator",
+    "center": [134, -28.2],
+    "scale": 650
+  },
+  "layer": [
+    {
+      "description": "Layer 1: Base Map Background Shapes (Using your required Top-Level GeoJSON URL)",
+      "data": {
+        "url": "https://raw.githubusercontent.com/rowanhogan/australian-states/master/states.geojson",
+        "format": { "type": "json", "property": "features" }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#f4f4f4",
+        "stroke": "white",
+        "strokeWidth": 1
+      }
+    },
+    {
+      "description": "Layer 2: Proportional Circle Symbols loading Total Museum data inland",
+      "data": {
+        "values": [
+          {"State": "New South Wales",              "Latitude": -32.5, "Longitude": 146.5, "Total_Museum_Objects": 421300},
+          {"State": "Victoria",                     "Latitude": -36.8, "Longitude": 144.3, "Total_Museum_Objects": 512850},
+          {"State": "Queensland",                   "Latitude": -22.5, "Longitude": 144.5, "Total_Museum_Objects": 184120},
+          {"State": "South Australia",              "Latitude": -30.0, "Longitude": 135.5, "Total_Museum_Objects": 143440},
+          {"State": "Western Australia",            "Latitude": -25.0, "Longitude": 122.0, "Total_Museum_Objects": 112890},
+          {"State": "Tasmania",                     "Latitude": -42.0, "Longitude": 146.6, "Total_Museum_Objects": 81950},
+          {"State": "Australian Capital Territory", "Latitude": -35.5, "Longitude": 149.1, "Total_Museum_Objects": 234310},
+          {"State": "Northern Territory",           "Latitude": -20.0, "Longitude": 133.5, "Total_Museum_Objects": 34120}
+        ]
+      },
+      "mark": {
+        "type": "circle",
+        "color": "#facc15",
+        "opacity": 0.85,
+        "stroke": "#333333",
+        "strokeWidth": 1
+      },
+      "encoding": {
+        "longitude": { "field": "Longitude", "type": "quantitative" },
+        "latitude":  { "field": "Latitude",  "type": "quantitative" },
+        "size": {
+          "field": "Total_Museum_Objects",
+          "type": "quantitative",
+          "scale": { "range": [80, 1800] },
+          "legend": { 
+            "title": "Total Museum Objects", 
+            "orient": "right", 
+            "format": "d",
+            "formatType": "number"
+          }
+        },
+        "tooltip": [
+          { "field": "State", "type": "nominal", "title": "State" },
+          { "field": "Total_Museum_Objects", "type": "quantitative", "title": "Total Collection Count", "format": "," }
+        ]
+      }
+    }
+  ]
+}
