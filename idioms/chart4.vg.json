@@ -1,38 +1,66 @@
 {
-  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Trend Line tracking aggregate population totals per age group",
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "background": null,
   "width": "container",
-  "height": 480,
-  "autosize": {"type": "fit", "contains": "padding"},
-  "data": {"url": "./data/abs_demographics_antiques.csv"},
-  "title": {
-    "font": "DM Sans, sans-serif",
-    "fontSize": 16,
-    "fontWeight": "bold",
-    "subtitleFontSize": 12,
-    "subtitleColor": "#65736d"
+  "height": 400,
+  "autosize": { "type": "fit", "contains": "padding" },
+  "config": { 
+    "view": { "stroke": null } 
   },
-  "mark": {
-    "type": "line", 
-    "point": {"color": "#78350f", "size": 40}, 
-    "strokeWidth": 3.5
-  },
-  "encoding": {
-    "x": {
-      "field": "Age_Group",
-      "type": "nominal",
-      "axis": {"title": "Age Cohort", "labelAngle": -15}
+  "data": { "url": "./data/historical_style_transformation.csv" },
+  "layer": [
+    {
+      "mark": { 
+        "type": "rect", 
+        "stroke": "white", 
+        "strokeWidth": 2 
+      },
+      "encoding": {
+        "x": { 
+          "field": "Style_Era", 
+          "type": "nominal", 
+          "axis": { "title": "Style Era", "labelAngle": 30 } 
+        },
+        "y": { 
+          "field": "Artifact_Category", 
+          "type": "nominal", 
+          "axis": { "title": "Artifact Category" } 
+        },
+        "color": { 
+          "field": "Object_Count", 
+          "type": "quantitative", 
+          "scale": { "scheme": "viridis" }, 
+          "legend": { "title": "Object Count" } 
+        },
+        "tooltip": [
+          { "field": "Style_Era", "type": "nominal" },
+          { "field": "Artifact_Category", "type": "nominal" },
+          { "field": "Object_Count", "type": "quantitative", "format": "," }
+        ]
+      }
     },
-    "y": {
-      "field": "Thousands_Of_People",
-      "type": "quantitative",
-      "aggregate": "sum",
-      "axis": {"title": "Total Generational Engagement ('000)"}
-    },
-    "color": {"value": "#78350f"},
-    "tooltip": [
-      {"field": "Age_Group", "type": "nominal", "title": "Age Group"},
-      {"field": "Thousands_Of_People", "type": "quantitative", "aggregate": "sum", "title": "Total Combined Visitors", "format": ","}
-    ]
-  }
+    {
+      "mark": { 
+        "type": "text", 
+        "fontSize": 12, 
+        "fontWeight": "bold" 
+      },
+      "encoding": {
+        "x": { "field": "Style_Era", "type": "nominal" },
+        "y": { "field": "Artifact_Category", "type": "nominal" },
+        "text": { 
+          "field": "Object_Count", 
+          "type": "quantitative", 
+          "format": ".0f" 
+        },
+        "color": {
+          "condition": {
+            "test": "datum.Object_Count > 2500",
+            "value": "#202b27"
+          },
+          "value": "#ffffff"
+        }
+      }
+    }
+  ]
 }

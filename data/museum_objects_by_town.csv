@@ -1,0 +1,24 @@
+Location_Name,State,Latitude,Longitude,Total_Museum_Objects
+Sydney,New South Wales,-33.8688,151.2093,145000
+Newcastle,New South Wales,-32.9283,151.7817,42000
+Bathurst,New South Wales,-33.4167,149.5833,18000
+Albury,New South Wales,-36.0800,146.9100,15000
+Tamworth,New South Wales,-31.0906,150.9292,12000
+Melbourne,Victoria,-37.8136,144.9631,165000
+Geelong,Victoria,-38.1499,144.3617,38000
+Ballarat,Victoria,-37.5622,143.8503,45000
+Bendigo,Victoria,-36.7570,144.2787,41000
+Brisbane,Queensland,-27.4705,153.0260,85000
+Cairns,Queensland,-16.9203,145.7710,22000
+Townsville,Queensland,-19.2564,146.8183,19000
+Toowoomba,Queensland,-27.5598,151.9507,14000
+Perth,Western Australia,-31.9505,115.8605,72000
+Fremantle,Western Australia,-32.0558,115.7424,25000
+Albany,Western Australia,-35.0228,117.8814,11000
+Adelaide,South Australia,-34.9285,138.6007,68000
+Mount Gambier,South Australia,-37.8294,140.7818,9000
+Hobart,Tasmania,-42.8821,147.3272,35000
+Launceston,Tasmania,-41.4341,147.1364,18000
+Darwin,Northern Territory,-12.4634,130.8456,15000
+Alice Springs,Northern Territory,-23.6980,133.8807,8000
+Canberra,Australian Capital Territory,-35.2809,149.1300,95000

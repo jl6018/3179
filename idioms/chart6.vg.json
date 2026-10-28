@@ -1,83 +1,103 @@
 {
-  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Idiom 1 Example: Antique counts by decade mapped alongside an average age line overlay.",
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "background": null,
   "width": "container",
   "height": 400,
-  "autosize": {"type": "fit", "contains": "padding"},
-  "data": {
-    "url": "./data/antiques_master_data.csv"
+  "autosize": { "type": "fit", "contains": "padding" },
+  "padding": { "right": 120 },
+  "config": { 
+    "view": { "stroke": null }, 
+    "axis": { "domain": true, "grid": false } 
   },
+  "data": { "url": "./data/historical_style_transformation.csv" },
+  "transform": [
+    { 
+      "window": [{ "op": "rank", "as": "Rank" }], 
+      "groupby": ["Style_Era"], 
+      "sort": [{ "field": "Object_Count", "order": "descending" }] 
+    }
+  ],
   "layer": [
     {
-      "description": "Primary Metric Channel: Volume Columns split across timeline decades",
-      "mark": {
-        "type": "bar",
-        "color": "#64748b",
-        "cornerRadiusTopLeft": 4,
-        "cornerRadiusTopRight": 4
-      },
+      "mark": { "type": "line", "strokeWidth": 2.5 },
       "encoding": {
-        "x": {
-          "field": "Decade",
-          "type": "nominal",
-          "axis": {
-            "title": "Production Decade",
-            "labelAngle": 0,
-            "labelFont": "DM Sans, sans-serif",
-            "titleFont": "DM Sans, sans-serif"
-          }
+        "x": { 
+          "field": "Style_Era", 
+          "type": "ordinal", 
+          "sort": ["Early Colonial","Victorian & Gold Rush","Federation & Late Colonial","Interwar & Modern"], 
+          "axis": { "title": "Style Era", "labelAngle": 15 } 
         },
-        "y": {
-          "field": "Object_Count",
-          "type": "quantitative",
-          "aggregate": "sum",
-          "axis": {
-            "title": "Total Registered Artifacts",
-            "labelFont": "DM Sans, sans-serif",
-            "titleFont": "DM Sans, sans-serif"
-          }
+        "y": { 
+          "field": "Rank", 
+          "type": "quantitative", 
+          "axis": { "title": "Rank (1 = highest volume)", "tickMinStep": 1 } 
+        },
+        "color": { 
+          "field": "Artifact_Category", 
+          "type": "nominal", 
+          "scale": { 
+            "domain": ["Ceramics & Pottery", "Furniture", "Horology & Clocks", "Household Utilities"], 
+            "range": ["#4e79a7", "#f28e2b", "#9c27b0", "#76b7b2"] 
+          }, 
+          "legend": null 
+        }
+      }
+    },
+    {
+      "mark": { "type": "point", "filled": true, "size": 80 },
+      "encoding": {
+        "x": { 
+          "field": "Style_Era", 
+          "type": "ordinal", 
+          "sort": ["Early Colonial","Victorian & Gold Rush","Federation & Late Colonial","Interwar & Modern"] 
+        },
+        "y": { 
+          "field": "Rank", 
+          "type": "quantitative" 
+        },
+        "color": { 
+          "field": "Artifact_Category", 
+          "type": "nominal", 
+          "scale": { 
+            "domain": ["Ceramics & Pottery", "Furniture", "Horology & Clocks", "Household Utilities"], 
+            "range": ["#4e79a7", "#f28e2b", "#9c27b0", "#76b7b2"] 
+          }, 
+          "legend": null 
         },
         "tooltip": [
-          {"field": "Decade", "type": "nominal", "title": "Decade Era"},
-          {"field": "Object_Count", "type": "quantitative", "aggregate": "sum", "title": "Total Inventory Vol.", "format": ","}
+          { "field": "Style_Era", "type": "nominal", "title": "Era" },
+          { "field": "Artifact_Category", "type": "nominal", "title": "Category" },
+          { "field": "Rank", "type": "quantitative", "title": "Rank" }
         ]
       }
     },
     {
-      "description": "Secondary Metric Channel: Dynamic Average Age trajectory curve tracking overall change over time",
-      "mark": {
-        "type": "line",
-        "strokeWidth": 3.5,
-        "point": {"color": "#ec4899", "size": 50}
-      },
+      "mark": { "type": "text", "align": "left", "dx": 8, "fontSize": 11, "fontWeight": "bold" },
+      "transform": [{ "filter": "datum.Style_Era === 'Interwar & Modern'" }],
       "encoding": {
-        "x": {
-          "field": "Decade", 
-          "type": "nominal"
+        "x": { 
+          "field": "Style_Era", 
+          "type": "ordinal", 
+          "sort": ["Early Colonial","Victorian & Gold Rush","Federation & Late Colonial","Interwar & Modern"] 
         },
-        "y": {
-          "field": "Avg_Age",
-          "type": "quantitative",
-          "aggregate": "mean",
-          "axis": {
-            "title": "Mean Age of Objects (Years)",
-            "orient": "right",
-            "grid": false,
-            "labelFont": "DM Sans, sans-serif",
-            "titleFont": "DM Sans, sans-serif"
-          }
+        "y": { 
+          "field": "Rank", 
+          "type": "quantitative" 
         },
-        "color": {"value": "#ec4899"},
-        "tooltip": [
-          {"field": "Decade", "type": "nominal", "title": "Decade Era"},
-          {"field": "Avg_Age", "type": "quantitative", "aggregate": "mean", "title": "Calculated Mean Age", "format": ".1f"}
-        ]
+        "text": { 
+          "field": "Artifact_Category", 
+          "type": "nominal" 
+        },
+        "color": { 
+          "field": "Artifact_Category", 
+          "type": "nominal", 
+          "scale": { 
+            "domain": ["Ceramics & Pottery", "Furniture", "Horology & Clocks", "Household Utilities"], 
+            "range": ["#4e79a7", "#f28e2b", "#9c27b0", "#76b7b2"] 
+          }, 
+          "legend": null 
+        }
       }
     }
-  ],
-  "resolve": {
-    "scale": {
-      "y": "independent"
-    }
-  }
+  ]
 }

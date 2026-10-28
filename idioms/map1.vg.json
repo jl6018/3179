@@ -1,37 +1,83 @@
 {
-  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": 800,
-  "height": 600,
-  "data": {
-    "url": "https://raw.githubusercontent.com/rowanhogan/australian-states/master/states.geojson",
-    "format": { "type": "json", "property": "features" }
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "background": null,
+  "width": "container",
+  "height": 400,
+  "autosize": { "type": "fit", "contains": "padding" },
+  "config": { 
+    "view": { "stroke": null } 
+  },
+  "data": { 
+    "url": "https://raw.githubusercontent.com/rowanhogan/australian-states/master/states.geojson", 
+    "format": { "type": "json", "property": "features" } 
   },
   "transform": [
-    {
-      "lookup": "properties.STATE_NAME",
-      "from": {
-        "data": { "url": "./data/museum_attendance_choropleth.csv" },
-        "key": "State",
-        "fields": ["Museum_Attendance_Rate_Percent"]
-      }
+    { 
+      "lookup": "properties.STATE_NAME", 
+      "from": { 
+        "data": { "url": "./data/museum_attendance_choropleth.csv" }, 
+        "key": "State", 
+        "fields": ["Museum_Attendance_Rate_Percent"] 
+      } 
     }
   ],
-  "projection": {
-    "type": "mercator",
-    "center": [134, -27],
-    "scale": 700
+  "projection": { 
+    "type": "mercator", 
+    "center": [134, -28], 
+    "scale": 550 
   },
-  "mark": { "type": "geoshape", "stroke": "white", "strokeWidth": 1 },
-  "encoding": {
-    "color": {
-      "field": "Museum_Attendance_Rate_Percent",
-      "type": "quantitative",
-      "scale": { "scheme": "orangered" },
-      "legend": { "title": "Attendance %" }
+  "layer": [
+    {
+      "mark": { 
+        "type": "geoshape", 
+        "fill": "#e0e0e0", 
+        "stroke": "white", 
+        "strokeWidth": 1
+      }
     },
-    "tooltip": [
-      { "field": "properties.STATE_NAME", "type": "nominal", "title": "State" },
-      { "field": "Museum_Attendance_Rate_Percent", "type": "quantitative", "title": "Attendance %" }
-    ]
-  }
+    {
+      "params": [
+        {
+          "name": "selectState",
+          "select": { 
+            "type": "point", 
+            "on": "pointerdown", 
+            "clear": "dblclick" 
+          }
+        }
+      ],
+      "mark": { 
+        "type": "geoshape", 
+        "cursor": "pointer"
+      },
+      "encoding": {
+        "color": { 
+          "field": "Museum_Attendance_Rate_Percent", 
+          "type": "quantitative", 
+          "scale": { "scheme": "orangered" }, 
+          "legend": { 
+            "title": "Attendance (%)", 
+            "orient": "right", 
+            "direction": "vertical"
+          } 
+        },
+        "opacity": {
+          "condition": { "param": "selectState", "value": 1 },
+          "value": 0.5
+        },
+        "stroke": {
+          "condition": { "param": "selectState", "value": null },
+          "value": "white"
+        },
+        "strokeWidth": {
+          "condition": { "param": "selectState", "value": 0 },
+          "value": 1
+        },
+        "tooltip": [
+          { "field": "properties.STATE_NAME", "type": "nominal", "title": "State" },
+          { "field": "Museum_Attendance_Rate_Percent", "type": "quantitative", "title": "Attendance (%)", "format": ".1f" }
+        ]
+      }
+    }
+  ]
 }

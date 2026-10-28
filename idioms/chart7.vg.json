@@ -1,0 +1,80 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "background": null,
+  "width": "container",
+  "height": 400,
+  "autosize": { "type": "fit", "contains": "padding" },
+  "config": {
+    "view": { "stroke": null },
+    "axis": { "domain": true, "grid": false }
+  },
+  "data": { "url": "./data/antiques_master_data.csv" },
+  "layer": [
+    {
+      "params": [
+        {
+          "name": "selectBar",
+          "select": { 
+            "type": "point", 
+            "fields": ["Decade"],
+            "on": "click", 
+            "clear": "dblclick" 
+          }
+        }
+      ],
+      "mark": { 
+        "type": "bar", 
+        "color": "#94a3b8", 
+        "cornerRadiusTopLeft": 4, 
+        "cornerRadiusTopRight": 4,
+        "cursor": "pointer"
+      },
+      "encoding": {
+        "x": { "field": "Decade", "type": "nominal", "axis": { "title": "Production Decade", "labelAngle": 0 } },
+        "y": { "field": "Object_Count", "type": "quantitative", "aggregate": "sum", "axis": { "title": "Total Registered Artifacts" } },
+        "opacity": {
+          "condition": { "param": "selectBar", "value": 1 },
+          "value": 0.2
+        },
+        "tooltip": [
+          { "field": "Decade", "type": "nominal", "title": "Decade" },
+          { "field": "Object_Count", "type": "quantitative", "aggregate": "sum", "title": "Artifacts", "format": "," }
+        ]
+      }
+    },
+    {
+      "mark": { 
+        "type": "line", 
+        "color": "#e15759", 
+        "strokeWidth": 3, 
+        "point": { "color": "#e15759", "size": 60 } 
+      },
+      "encoding": {
+        "x": { "field": "Decade", "type": "nominal" },
+        "y": { 
+          "field": "Avg_Age", 
+          "type": "quantitative", 
+          "aggregate": "mean", 
+          "axis": { 
+            "title": "Mean Age of Objects (Years)", 
+            "orient": "right", 
+            "domain": true
+          } 
+        },
+        "opacity": {
+          "condition": { "param": "selectBar", "value": 1 },
+          "value": 0.2
+        },
+        "tooltip": [
+          { "field": "Decade", "type": "nominal", "title": "Decade" },
+          { "field": "Avg_Age", "type": "quantitative", "aggregate": "mean", "title": "Avg Age", "format": ".1f" }
+        ]
+      }
+    }
+  ],
+  "resolve": { 
+    "scale": { 
+      "y": "independent" 
+    } 
+  }
+}

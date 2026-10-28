@@ -1,37 +1,54 @@
 {
-  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Grouped Bars showing absolute visitor metrics by Gender",
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "background": null,
   "width": "container",
-  "height": 480,
-  "autosize": {"type": "fit", "contains": "padding"},
-  "data": {"url": "./data/abs_demographics_antiques.csv"},
-  "mark": {
+  "height": 400,
+  "autosize": { "type": "fit", "contains": "padding" },
+  "config": { 
+    "view": { "stroke": null },
+    "axis": { "domain": true, "grid": false } 
+  },
+  "data": { "url": "./data/antiques_master_data.csv" },
+  "params": [
+    {
+      "name": "highlightDecade",
+      "select": { "type": "point", "on": "click", "clear": "dblclick" }
+    }
+  ],
+  "mark": { 
     "type": "bar", 
-    "cornerRadiusTopLeft": 4, 
-    "cornerRadiusTopRight": 4
+    "cornerRadiusTopRight": 4, 
+    "cornerRadiusBottomRight": 4,
+    "cursor": "pointer"
   },
   "encoding": {
-    "x": {
-      "field": "Age_Group",
-      "type": "nominal",
-      "axis": {"title": "Age Cohort", "labelAngle": -15}
+    "y": { 
+      "field": "Decade", 
+      "type": "nominal", 
+      "sort": "-x",
+      "axis": { "title": "Production Decade", "labelAngle": 0 } 
     },
-    "y": {
-      "field": "Thousands_Of_People",
-      "type": "quantitative",
-      "axis": {"title": "Gender Attendance Count ('000)", "titleColor": "#254c3e"}
+    "x": { 
+      "field": "Object_Count", 
+      "type": "quantitative", 
+      "aggregate": "sum", 
+      "axis": { "title": "Total Registered Artifacts" } 
     },
-    "xOffset": {"field": "Sex"},
     "color": {
-      "field": "Sex",
-      "type": "nominal",
-      "scale": {"range": ["#254c3e", "#d9b47b"]},
-      "legend": {"title": "Gender", "orient": "top"}
+      "condition": {
+        "param": "highlightDecade",
+        "empty": false,
+        "value": "#254c3e"
+      },
+      "value": "#a0b4a9"
+    },
+    "opacity": {
+      "condition": { "param": "highlightDecade", "value": 1 },
+      "value": 0.8
     },
     "tooltip": [
-      {"field": "Age_Group", "type": "nominal", "title": "Age"},
-      {"field": "Sex", "type": "nominal", "title": "Gender"},
-      {"field": "Thousands_Of_People", "type": "quantitative", "title": "Visitors ('000)"}
+      { "field": "Decade", "type": "nominal", "title": "Decade" },
+      { "field": "Object_Count", "type": "quantitative", "aggregate": "sum", "title": "Artifacts", "format": "," }
     ]
   }
 }

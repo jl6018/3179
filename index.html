@@ -3,147 +3,168 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Antiques Collection — Vega-Lite Explorer</title>
+  
+  <!-- Document Metadata -->
+  <title>Antiques Collection in Australia — A Material Heritage Story</title>
+  
+  <!-- External Stylesheet -->
   <link rel="stylesheet" href="style.css">
-  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+  
+  <!-- Vega, Vega-Lite, and Vega-Embed Libraries (v6) -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@7"></script>
 </head>
 <body>
+
+  <!-- ===================== HERO HEADER ===================== -->
   <header class="hero">
-    <h1>Antiques Collection in Australia</h1>
+    <div class="hero-content">
+      <h1>Antiques Collection in Australia</h1>
+      <p class="lead">A story of colonial trade, regional wealth, and generational memory.</p>
+    </div>
   </header>
 
+  <!-- ===================== MAIN CONTENT AREA ===================== -->
   <main>
-    <!-- MAP 1 -->
-    <section class="panel map-panel">
-      <div class="map-heading">
-        <div>
-          <h2>Museum Attendance</h2>
-          <p>Australian states shaded by regional public museum attendance rates (%)</p>
-        </div>
+    
+    <!-- 1. Proportional Symbol Map -->
+    <section class="split-section">
+      <div class="text-col">
+        <!-- Inline style prevents the long title from wrapping awkwardly -->
+        <h2 style="white-space: nowrap;">Total Historical Object Collections</h2>
+        <p class="section-intro">Proportional symbols show registered collection sizes. Victoria and New South Wales dominate national holdings. They hold the vast majority of artifacts.</p>
       </div>
-      <div id="map1" class="vega-container"></div>
+      <div class="chart-col"><div id="map2" class="vega-container"></div></div>
     </section>
 
-    <!-- MAP 2 -->
-    <section class="panel map-panel">
-      <div class="map-heading">
-        <div>
-          <h2>Total Antique Historical Object Collections</h2>
-          <p>Proportional symbols tracking total registered material heritage items<br>
-          and antique artifact records in state archives.</p>
-        </div>
+    <!-- 2. Choropleth Map -->
+    <section class="split-section reverse">
+      <div class="chart-col"><div id="map1" class="vega-container"></div></div>
+      <div class="text-col">
+        <h2>Where Australians Visit Museums</h2>
+        <p class="section-intro">Public museum attendance varies sharply by state. The Northern Territory leads nationally. New South Wales and Victoria record lower rates.</p>
       </div>
-      <div id="map2" class="vega-container"></div>
     </section>
 
-    <!-- MAP 3 -->
-    <section class="panel map-panel">
-      <div class="map-heading">
-        <div>
-          <h2>Dot Density Distribution of Artifacts</h2>
-          <p>Scattered point markers revealing intense historical clustering<br>
-          of antique collections within early coastal settlements</p>
-        </div>
+    <!-- 3. Dot Density Map -->
+    <section class="split-section">
+      <div class="text-col">
+        <h2>Dot Density of Artifact Records</h2>
+        <p class="section-intro">Scattered markers reveal historical clustering. Artifacts concentrate in early coastal settlements. This highlights early colonial expansion.</p>
       </div>
-      <div id="map3" class="vega-container"></div>
+      <div class="chart-col"><div id="map3" class="vega-container"></div></div>
     </section>
 
-    <!-- Chart 1: Grouped Bar Chart -->
-    <section class="panel map-panel">
-      <div class="map-heading">
-        <div>
-          <h2>Composition of Australia's Antique Collections</h2>
-          <p>Proportional share of objects tracked across recorded antique categories</p>
-        </div>
+    <!-- 4. Donut Chart -->
+    <section class="split-section reverse">
+      <div class="chart-col"><div id="idiom1" class="vega-container"></div></div>
+      <div class="text-col">
+        <h2>Composition of Antiques</h2>
+        <p class="section-intro">Ceramics dominate the recorded inventory. Furniture and household utilities follow closely. Jewellery forms a smaller but significant share.</p>
       </div>
-      <div id="idiom1" class="vega-container"></div>
     </section>
 
-    <!-- Chart 2: Dual Axis Layered Chart -->
-    <section class="panel map-panel">
-      <div class="map-heading">
-        <div>
-          <h2>Origins of Antiques Across Australian States</h2>
-          <p>Distribution of item manufacturing origins across regional collection repositorie</p>
-        </div>
+    <!-- 5. Heatmap -->
+    <section class="split-section">
+      <div class="text-col">
+        <h2>Artifact Density by Era</h2>
+        <p class="section-intro">The heatmap shows dominant category-era combinations. Victorian and Gold Rush ceramics form the largest concentration. Other eras show significantly lower density.</p>
       </div>
-      <div id="idiom2" class="vega-container"></div>
+      <div class="chart-col"><div id="idiom4" class="vega-container"></div></div>
     </section>
 
-    <!-- Chart 3: Faceted Donut Rings -->
-    <section class="panel map-panel">
-      <div class="map-heading">
-        <div>
-          <h2>Regional Repository Material Composition</h2>
-          <p>Side-by-side high-definition donut charts tracking the structural share breakdown<br>
-            of major institutional holdings</p>
-        </div>
+    <!-- 6. Slope Chart -->
+    <section class="split-section reverse">
+      <div class="chart-col"><div id="idiom6" class="vega-container"></div></div>
+      <div class="text-col">
+        <h2>How Categories Shifted</h2>
+        <p class="section-intro">This slope chart tracks category ranks across eras. Ceramics rise sharply in prominence. Conversely, furniture declines in relative volume.</p>
       </div>
-      <div id="idiom3" class="vega-container"></div>
     </section>
 
-    <!-- Chart 4: Treemap Card Layout -->
-    <section class="panel map-panel">
-      <div class="map-heading">
-        <div>
-          <h2>National Archive Engagement by Age Cohort</h2>
-          <p>A line chart tracking total generational engagement<br>
-            across different age demographics</p>
-        </div>
+    <!-- 7. Horizontal Bar Chart -->
+    <section class="split-section">
+      <div class="text-col">
+        <h2>Volume by Decade</h2>
+        <p class="section-intro">This chart breaks down artifacts by decade. 1850s and 1920s periods show the highest volume. Later decades see fewer registered items.</p>
       </div>
-      <div id="idiom4" class="vega-container"></div>
+      <div class="chart-col"><div id="idiom3" class="vega-container"></div></div>
     </section>
 
-    <!-- Chart 5: Packed Bubble Chart -->
-    <section class="panel map-panel">
-      <div class="map-heading">
-        <div>
-          <h2>Preservation Sizing Category Clusters</h2>
-          <p>Absolute volume of physical objects preserved across major classification types</p>
-        </div>
+    <!-- 8. Dual-Axis Chart (Bar + Line) -->
+    <section class="split-section reverse">
+      <div class="chart-col"><div id="idiom7" class="vega-container"></div></div>
+      <div class="text-col">
+        <h2>Volume and Mean Age</h2>
+        <p class="section-intro">Production peaked in the Victorian and Gold Rush eras. Surviving artifact volume drops in later decades. Consequently, their average age naturally decreases.</p>
       </div>
-      <div id="idiom5" class="vega-container"></div>
     </section>
 
-    <!-- Chart 6: Interactive Heatmap Grid Matrix -->
-    <section class="panel map-panel">
-      <div class="map-heading">
-        <div>
-          <h2>Material Classification and Chronological Transformation Grid</h2>
-          <p>An interactive, hover-responsive heatmap matrix cross-tabulating<br>
-            collection densities across historical eras and styles</p>
-        </div>
+    <!-- 9. Dumbbell Plot (Connected Dots) -->
+    <section class="split-section">
+      <div class="text-col">
+        <h2>Comparing Attendance</h2>
+        <p class="section-intro">Connected dots compare visual arts and crafts. Every state shows higher craft participation. The gap is widest in Western Australia.</p>
       </div>
-      <div id="idiom6" class="vega-container"></div>
+      <div class="chart-col"><div id="idiom5" class="vega-container"></div></div>
     </section>
 
-  <!-- AUTHORSHIP, DATE & METADATA SECTION (Inserted after Chart 6) -->
-  <div class="panel" style="background: var(--green-light); border-color: var(--line);">
-    <div class="map-heading" style="margin-bottom: 0;">
-      <div>
-        <h2 style="color: var(--green); margin-bottom: 6px;">Authority</h2>
-        <p style="margin-bottom: 12px;"><strong>Author:</strong> Lim Jia Li 34476523</p>
-        <p style="margin-bottom: 12px;"><strong>Date of Publication:</strong> 15 October 2026</p>
+    <!-- 10. Multi-line Chart -->
+    <section class="split-section reverse">
+      <div class="chart-col"><div id="idiom2" class="vega-container"></div></div>
+      <div class="text-col">
+        <h2>Engagement by Age</h2>
+        <p class="section-intro">Females aged 35–44 show the highest engagement. Engagement drops sharply after age 75. This trend holds across all demographics.</p>
       </div>
-    </div>
-  </div>
+    </section>
 
+    <!-- ===================== REFERENCES & DATA SOURCES ===================== -->
+    <section class="references">
+      <h2>References</h2>
+      <ul style="text-align: center; max-width: 1000px; margin: 0 auto; padding-left: 0; list-style-type: none; line-height: 2;">
+        
+        <li style="margin-bottom: 10px;">Australian Bureau of Statistics. (2023, April 27). <em>Cultural and creative activities, 2021–22</em>. <a href="https://www.abs.gov.au/statistics/people/people-and-communities/cultural-and-creative-activities/latest-release" target="_blank">https://www.abs.gov.au/statistics/people/people-and-communities/cultural-and-creative-activities/latest-release</a></li>
+        
+        <li style="margin-bottom: 10px;">Creative Australia. (2024). <em>Arts and cultural attendance and participation local region rates</em>. <a href="https://creative.gov.au/research/arts-and-cultural-attendance-and-participation-local-region-rates" target="_blank">https://creative.gov.au/research/arts-and-cultural-attendance-and-participation-local-region-rates</a></li>
+        
+        <li style="margin-bottom: 10px;">Hogan, R. (n.d.). <em>Australian states GeoJSON</em> [Data set]. GitHub. <a href="https://github.com/rowanhogan/australian-states" target="_blank">https://github.com/rowanhogan/australian-states</a></li>
+
+        <li style="margin-bottom: 10px;">Queensland Museum Network. (2023). <em>Queensland Museum collection of ethnographic objects</em>. Queensland Government Open Data Portal. <a href="https://www.data.qld.gov.au/dataset/queensland-museum-collection-of-ethnographic-objects" target="_blank">https://www.data.qld.gov.au/dataset/queensland-museum-collection-of-ethnographic-objects</a></li>
+        
+        <li style="margin-bottom: 10px;">Queensland Museum Network. (2023). <em>Queensland Museum collection of historical objects</em>. Queensland Government Open Data Portal. <a href="https://www.data.qld.gov.au/dataset/queensland-museum-collection-of-historical-objects" target="_blank">https://www.data.qld.gov.au/dataset/queensland-museum-collection-of-historical-objects</a></li>
+        
+      </ul>
+      
+      <!-- Author Info -->
+      <div class="author-info" style="text-align: left; max-width: 1000px; margin: 30px auto 0 auto;">
+        <p>Author: Lim Jia Li (34476523)</p>
+        <p>Created: October 2026</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== JAVASCRIPT: VEGA-EMBED LOGIC ===================== -->
   <script>
-    const OPT = { actions: false, renderer: "canvas" };
+    // Options for vegaEmbed: disable actions (three-dot menu) and use SVG for crisp text rendering
+    const OPT = { actions: false, renderer: "svg" }; 
 
-    vegaEmbed("#map1", "./idioms/map1.vg.json", OPT).catch(err => console.error("Map 1 failed:", err));
-    vegaEmbed("#map2", "./idioms/map2.vg.json", OPT).catch(err => console.error("Map 2 failed:", err));
-    vegaEmbed("#map3", "./idioms/map3.vg.json", OPT).catch(err => console.error("Map 3 failed:", err));
+    // Helper function to embed a chart into a specific HTML element
+    function embed(id, spec) {
+      vegaEmbed("#" + id, spec, OPT).catch(e => console.error("Error in " + id + ":", e));
+    }
 
-    vegaEmbed("#idiom1", "./idioms/chart1.vg.json", OPT).catch(e => console.error("Chart 1 failed:", e));
-    vegaEmbed("#idiom2", "./idioms/chart2.vg.json", OPT).catch(e => console.error("Chart 2 failed:", e));
-    vegaEmbed("#idiom3", "./idioms/chart3.vg.json", OPT).catch(e => console.error("Chart 3 failed:", e));
-    vegaEmbed("#idiom4", "./idioms/chart4.vg.json", OPT).catch(e => console.error("Chart 4 failed:", e));
-    vegaEmbed("#idiom5", "./idioms/chart5.vg.json", OPT).catch(e => console.error("Chart 5 failed:", e));
-    vegaEmbed("#idiom6", "./idioms/chart6.vg.json", OPT).catch(e => console.error("Chart 6 failed:", e));
-    vegaEmbed("#idiom7", "./idioms/chart7.vg.json", OPT).catch(e => console.error("Chart 7 failed:", e));
+    // Loop through all chart IDs and embed their corresponding Vega-Lite JSON specs
+    embed("map1", "./idioms/map1.vg.json");
+    embed("map2", "./idioms/map2.vg.json");
+    embed("map3", "./idioms/map3.vg.json");
+    embed("idiom1", "./idioms/chart1.vg.json");
+    embed("idiom2", "./idioms/chart2.vg.json");
+    embed("idiom3", "./idioms/chart3.vg.json");
+    embed("idiom4", "./idioms/chart4.vg.json");
+    embed("idiom5", "./idioms/chart5.vg.json");
+    embed("idiom6", "./idioms/chart6.vg.json");
+    embed("idiom7", "./idioms/chart7.vg.json");
   </script>
 </body>
 </html>

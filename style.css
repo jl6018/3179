@@ -1,11 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
 
+/* ===================== DESIGN TOKENS ===================== */
+/* Centralised CSS variables for consistent theming across the page */
 :root {
-  --ink: #202b27; --muted: #65736d; --paper: #f5f5ef;
-  --panel: #ffffff; --line: #e0e5dd; --green: #254c3e;
-  --green-light: #e9f0eb; --shadow: 0 8px 28px rgba(28, 48, 39, .06);
+  --ink: #202b27;
+  --muted: #65736d;
+  --paper: #f5f5ef;
+  --panel: #ffffff;
+  --line: #e0e5dd;
+  --green: #254c3e;
+  --green-light: #e9f0eb;
+  --shadow: 0 8px 28px rgba(28, 48, 39, .06);
 }
 
+/* ===================== GLOBAL RESET ===================== */
 * { box-sizing: border-box; }
 
 body {
@@ -13,35 +21,42 @@ body {
   background: var(--paper);
   color: var(--ink);
   font-family: "DM Sans", sans-serif;
+  line-height: 1.6;
 }
 
-/* Hero banner */
+/* ===================== HERO BANNER ===================== */
+/* Top header section containing the main title and subtitle */
 .hero {
-  padding: 40px max(22px, calc((100% - 1160px) / 2));
+  padding: 60px 20px;
   color: #fff;
-  background: #203e34;
+  background: #203e34; 
+  text-align: center; 
+}
+
+.hero-content {
+  max-width: 65ch; /* Restricts line length for better readability */
+  margin: 0 auto; 
 }
 
 h1 {
   margin: 0;
   font-family: "Playfair Display", serif;
   font-weight: 700;
-  font-size: clamp(1.5rem, 3.2vw, 2.2rem); /* fluid, no clipping */
+  font-size: clamp(1.8rem, 3.4vw, 2.4rem); /* Responsive font scaling */
   line-height: 1.2;
 }
 
-main {
-  width: min(1160px, calc(100% - 32px));
-  margin: 26px auto 50px;
+.lead {
+  margin: 16px 0 0;
+  font-size: 1.15rem;
+  color: #d8e4dc; 
+  line-height: 1.5;
 }
 
-.panel {
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  box-shadow: var(--shadow);
-  padding: 24px;
-  margin-bottom: 22px;
+/* ===================== MAIN LAYOUT ===================== */
+main {
+  width: min(1160px, calc(100% - 32px)); /* Limits width on large screens */
+  margin: 26px auto 50px;
 }
 
 h2 {
@@ -49,37 +64,119 @@ h2 {
   font: 700 1.5rem "Playfair Display", serif;
 }
 
-p { line-height: 1.6; }
+p { line-height: 1.65; }
 
-.map-heading {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 18px;
-  margin-bottom: 16px;
+/* ===================== Z-PATTERN SPLIT SECTIONS ===================== */
+/* Alternates text and chart positions using CSS Grid */
+.split-section {
+  display: grid;
+  grid-template-columns: 1fr 2fr; /* Text gets 1 part, chart gets 2 parts */
+  gap: 40px;
+  align-items: center;
+  padding: 30px 0; 
+  border-bottom: 1px solid var(--line); 
 }
 
-.map-heading p { margin: 0; color: var(--muted); }
+/* Removes the divider from the last section to avoid doubling with References */
+.split-section:last-of-type {
+  border-bottom: none;
+  padding-bottom: 20px;
+}
 
-/* Container for each Vega view.
-   Sized generously so Vega's own titles/subtitles have room. */
+/* Flips the grid layout so the chart is on the left and text is on the right */
+.split-section.reverse {
+  grid-template-columns: 2fr 1fr; 
+}
+
+.text-col {
+  max-width: 65ch; 
+}
+
+.section-intro {
+  margin: 0;
+  color: var(--muted);
+  font-size: 1.05rem;
+  line-height: 1.8; 
+}
+
+.chart-col {
+  width: 100%;
+}
+
+/* ===================== VEGA CHART CONTAINERS ===================== */
+/* Ensures the Vega-Lite charts stretch to fill their grid columns */
 .vega-container {
   width: 100%;
-  min-height: 520px;
-  display: flex;
-  justify-content: center;
 }
 
-/* Make the embedded vega wrapper responsive */
 .vega-container .vega-embed,
 .vega-container .vega-embed > div {
   width: 100%;
 }
 
-/* Responsive tweaks */
+/* ===================== REFERENCES SECTION ===================== */
+.references {
+  margin-top: 20px;
+  padding-top: 40px;
+  text-align: center; 
+}
+
+.references h2 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.references ul {
+  list-style-type: none; /* Removes default bullet points */
+  padding: 0;
+  margin: 0 auto 30px auto;
+  max-width: 85ch; 
+  text-align: center; 
+}
+
+.references li {
+  margin-bottom: 12px;
+  font-size: 0.95rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.references a {
+  color: #4e79a7; 
+  text-decoration: none;
+}
+
+.references a:hover {
+  text-decoration: underline;
+}
+
+.author-info {
+  text-align: left; 
+  max-width: 85ch;
+  margin: 0 auto;
+  font-size: 0.9rem;
+  color: var(--ink);
+}
+
+.author-info p {
+  margin: 4px 0;
+}
+
+/* ===================== VEGA OVERRIDES ===================== */
+/* Hides the default Vega action menu (the three dots) for a clean look */
+.vega-embed .vega-actions { display: none !important; }
+
+/* ===================== RESPONSIVE DESIGN ===================== */
+/* Stacks text and charts vertically on screens smaller than 900px */
+@media (max-width: 900px) {
+  .split-section, .split-section.reverse {
+    grid-template-columns: 1fr; 
+    gap: 20px;
+    padding: 40px 0; 
+  }
+}
+
+/* Reduces padding on the hero banner for very small mobile screens */
 @media (max-width: 720px) {
-  .hero { padding: 28px 20px; }
-  .panel { padding: 17px; }
-  .map-heading { display: block; }
-  .vega-container { min-height: 380px; }
+  .hero { padding: 40px 20px; }
 }

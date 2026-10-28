@@ -1,54 +1,62 @@
 {
-  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Idiom 3: Horizontal Bar Chart tracking absolute frequencies across antique sectors.",
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "background": null,
   "width": "container",
-  "height": 480,
-  "autosize": {"type": "fit", "contains": "padding"},
-  "data": {
-    "url": "./data/antiques_master_data.csv"
+  "height": 400,
+  "autosize": { "type": "fit", "contains": "padding" },
+  "config": { 
+    "view": { "stroke": "#e0e5dd" },
+    "axis": { "domain": true, "grid": true, "gridColor": "#e0e5dd" } 
   },
-  "title": {
-    "font": "DM Sans, sans-serif",
-    "fontSize": 16,
-    "fontWeight": "bold",
-    "subtitleFontSize": 12,
-    "subtitleColor": "#65736d"
-  },
-  "mark": {
-    "type": "bar",
-    "color": "#7b2cbf",
-    "cornerRadiusTopRight": 4,
-    "cornerRadiusBottomRight": 4,
-    "cursor": "pointer",
-    "tooltip": true
-  },
-  "encoding": {
-    "y": {
-      "field": "Category",
-      "type": "nominal",
-      "title": "Antique Type",
-      "sort": "-x",
-      "axis": {
-        "labelFont": "DM Sans, sans-serif", 
-        "titleFont": "DM Sans, sans-serif",
-        "titlePadding": 10
+  "data": { "url": "./data/abs_cultural_data.csv" },
+  "transform": [{ "fold": ["Attendance_Rate_Percent"], "as": ["Dummy", "Rate"] }],
+  "layer": [
+    {
+      "transform": [{ "pivot": "Category", "value": "Attendance_Rate_Percent", "groupby": ["State"] }],
+      "mark": { "type": "rule", "color": "#94a3b8", "strokeWidth": 3 },
+      "encoding": {
+        "y": { "field": "State", "type": "nominal", "sort": "-x", "axis": { "title": null } },
+        "x": { "field": "Crafts", "type": "quantitative", "axis": { "title": "Attendance Rate (%)" } },
+        "x2": { "field": "Visual Arts" },
+        "opacity": {
+          "condition": { "param": "selectState", "value": 1 },
+          "value": 0.2
+        }
       }
     },
-    "x": {
-      "field": "Object_Count",
-      "type": "quantitative",
-      "aggregate": "sum",
-      "title": "Number of Objects Recorded",
-      "axis": {
-        "grid": true,
-        "gridColor": "#e0e5dd",
-        "labelFont": "DM Sans, sans-serif",
-        "titleFont": "DM Sans, sans-serif"
+    {
+      "params": [
+        {
+          "name": "selectState",
+          "select": { 
+            "type": "point", 
+            "fields": ["State"],
+            "on": "click", 
+            "clear": "dblclick" 
+          }
+        }
+      ],
+      "transform": [{ "pivot": "Category", "value": "Attendance_Rate_Percent", "groupby": ["State"] }, { "fold": ["Visual Arts", "Crafts"], "as": ["Category", "Rate"] }],
+      "mark": { "type": "point", "filled": true, "size": 120, "stroke": "white", "strokeWidth": 1.5, "cursor": "pointer" },
+      "encoding": {
+        "y": { "field": "State", "type": "nominal" },
+        "x": { "field": "Rate", "type": "quantitative" },
+        "color": { 
+          "field": "Category", 
+          "type": "nominal", 
+          "scale": { "domain": ["Visual Arts", "Crafts"], "range": ["#4e79a7", "#e15759"] }, 
+          "legend": { "title": "Category", "orient": "right" } 
+        },
+        "opacity": {
+          "condition": { "param": "selectState", "value": 1 },
+          "value": 0.2
+        },
+        "tooltip": [
+          { "field": "State", "type": "nominal" },
+          { "field": "Category", "type": "nominal" },
+          { "field": "Rate", "type": "quantitative", "format": ".1f" }
+        ]
       }
-    },
-    "tooltip": [
-      {"field": "Category", "type": "nominal", "title": "Category"},
-      {"field": "Object_Count", "type": "quantitative", "aggregate": "sum", "title": "Total Items Tracked", "format": ","}
-    ]
-  }
+    }
+  ]
 }
